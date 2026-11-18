@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090817">
+  <meta name="description" content="Personal portfolio of a software engineering student and creative web developer in Kampala, Uganda.">
+  <title>Your Name | Creative Developer</title>
+  <style>
+    :root {
+      --bg: rgb(9, 8, 23);
+      --panel: rgb(20, 18, 43);
+      --panel-2: rgb(27, 24, 57);
+      --text: rgb(245, 243, 255);
+      --muted: rgb(174, 169, 202);
+      --purple: rgb(160, 90, 255);
+      --cyan: rgb(40, 220, 255);
+      --pink: rgb(255, 70, 190);
+      --line: rgba(190, 170, 255, .18);
+      --glow: 0 0 35px rgba(160, 90, 255, .22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(115, 50, 220, .18), transparent 30rem),
+        radial-gradient(circle at 90% 35%, rgba(20, 180, 230, .12), transparent 28rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .site-header {
+      position: fixed; inset: 0 0 auto; z-index: 20;
+      background: rgba(9, 8, 23, .78); backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-weight: 900; letter-spacing: .08em; font-size: 1.05rem; }
+    .brand span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 25px; list-style: none; color: var(--muted); font-size: .92rem; }
+    .nav-links a { transition: color .25s ease; }
+    .nav-links a:hover { color: var(--cyan); }
+    .menu-toggle { display: none; border: 1px solid var(--line); color: var(--text); background: var(--panel); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+
+    .hero { min-height: 100vh; display: grid; align-items: center; padding: 130px 0 80px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 55px; }
+    .eyebrow { display: inline-flex; gap: 10px; align-items: center; color: var(--cyan); font-size: .82rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+    h1 { font-size: clamp(2.8rem, 7vw, 5.6rem); line-height: 1.04; letter-spacing: -.055em; margin: 20px 0; }
+    .gradient-text { background: linear-gradient(100deg, var(--cyan), #a987ff 48%, var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { color: var(--muted); max-width: 590px; font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid transparent; border-radius: 999px; padding: 12px 21px; font-weight: 750; cursor: pointer; transition: transform .25s, box-shadow .25s, background .25s; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { color: #090817; background: linear-gradient(100deg, var(--cyan), #a98aff); box-shadow: 0 8px 28px rgba(40, 220, 255, .2); }
+    .btn-secondary { border-color: var(--line); background: rgba(255,255,255,.035); color: var(--text); }
+    .hero-art { min-height: 390px; display: grid; place-items: center; position: relative; }
+    .orb { width: min(330px, 75vw); aspect-ratio: 1; border-radius: 50%; position: relative; background: radial-gradient(circle at 32% 28%, rgba(40,220,255,.95), rgba(126,72,255,.65) 34%, rgba(255,70,190,.3) 60%, transparent 70%); filter: drop-shadow(0 0 55px rgba(142,83,255,.35)); animation: float 6s ease-in-out infinite; }
+    .orb::before, .orb::after { content: ""; position: absolute; inset: 9%; border: 1px solid rgba(170,220,255,.5); border-radius: 50%; transform: rotate(-28deg) scaleY(.38); }
+    .orb::after { transform: rotate(55deg) scaleY(.55); border-color: rgba(255,130,220,.55); }
+    .orb-core { position: absolute; inset: 28%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, white, var(--cyan) 20%, #7b48ff 65%, #1b1740); box-shadow: 0 0 65px rgba(40,220,255,.55); }
+    .floating-tag { position: absolute; padding: 10px 14px; border: 1px solid var(--line); background: rgba(20,18,43,.8); backdrop-filter: blur(12px); border-radius: 14px; color: var(--text); box-shadow: var(--glow); font-size: .85rem; }
+    .tag-one { top: 12%; left: 0; } .tag-two { right: 0; bottom: 17%; }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-18px) rotate(4deg); } }
+
+    section { padding: 95px 0; }
+    .section-head { margin-bottom: 38px; max-width: 680px; }
+    .section-kicker { color: var(--cyan); font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h2 { font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.15; margin-top: 9px; letter-spacing: -.035em; }
+    .section-desc { color: var(--muted); margin-top: 13px; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .glass, .skill-card, .project-card, .contact-card { background: linear-gradient(145deg, rgba(30,27,62,.88), rgba(15,14,34,.88)); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--glow); }
+    .glass { padding: 28px; }
+    .glass p { color: var(--muted); }
+    .info-line { display: flex; justify-content: space-between; gap: 20px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .info-line:last-child { border: 0; }
+    .info-line span:first-child { color: var(--muted); }
+    .info-line strong { text-align: right; }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .skill-card { padding: 22px; transition: transform .25s, border-color .25s; }
+    .skill-card:hover, .project-card:hover { transform: translateY(-6px); border-color: rgba(40,220,255,.55); }
+    .skill-icon { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 13px; margin-bottom: 15px; color: var(--cyan); background: rgba(40,220,255,.1); font-weight: 900; }
+    .skill-card p { color: var(--muted); font-size: .9rem; margin-top: 5px; }
+    .skill-meter { height: 5px; border-radius: 20px; background: rgba(255,255,255,.09); margin-top: 17px; overflow: hidden; }
+    .skill-meter span { display: block; height: 100%; width: var(--level); background: linear-gradient(90deg, var(--purple), var(--cyan)); border-radius: inherit; }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { padding: 24px; transition: transform .25s, border-color .25s; }
+    .project-number { color: var(--cyan); font-size: .8rem; font-weight: 800; letter-spacing: .12em; }
+    .project-card h3 { margin: 12px 0 8px; }
+    .project-card p { color: var(--muted); font-size: .92rem; }
+    .project-link { display: inline-block; margin-top: 18px; color: var(--cyan); font-weight: 750; font-size: .9rem; }
+
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 22px; }
+    .contact-card { padding: 27px; }
+    .contact-item { padding: 13px 0; border-bottom: 1px solid var(--line); color: var(--muted); overflow-wrap: anywhere; }
+    .contact-item strong { display: block; color: var(--text); }
+    form { display: grid; gap: 13px; }
+    input, textarea { width: 100%; color: var(--text); background: rgba(4,4,18,.55); border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; outline: none; transition: border-color .2s, box-shadow .2s; }
+    input:focus, textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(40,220,255,.1); }
+    textarea { min-height: 125px; resize: vertical; }
+    .form-note { color: var(--muted); font-size: .8rem; }
+    footer { padding: 27px 0; border-top: 1px solid var(--line); color: var(--muted); text-align: center; font-size: .88rem; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    #backToTop { position: fixed; right: 20px; bottom: 20px; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; color: var(--text); background: var(--panel-2); cursor: pointer; opacity: 0; pointer-events: none; transition: .25s; }
+    #backToTop.show { opacity: 1; pointer-events: auto; }
+    .cursor-glow { position: fixed; width: 240px; height: 240px; border-radius: 50%; pointer-events: none; z-index: -1; background: radial-gradient(circle, rgba(120,80,255,.09), transparent 70%); transform: translate(-50%,-50%); }
+
+    @media (max-width: 850px) {
+      .hero-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-art { min-height: 320px; }
+      .skills-grid, .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding-top: 120px; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(100% - 30px, 1120px); }
+      .nav { min-height: 68px; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 15px; right: 15px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(15,14,34,.97); flex-direction: column; align-items: stretch; gap: 15px; }
+      .nav-links.open { display: flex; }
+      .hero { min-height: auto; padding: 125px 0 65px; }
+      .hero-grid { gap: 12px; }
+      .hero-art { min-height: 275px; }
+      .orb { width: 235px; }
+      .tag-one { left: 2%; } .tag-two { right: 2%; }
+      section { padding: 70px 0; }
+      .about-grid, .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+      .glass, .contact-card { padding: 22px; }
+      h1 { font-size: clamp(2.7rem, 14vw, 4.4rem); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home">YOUR<span>NAME</span>.</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">Software engineering student · Kampala, Uganda</span>
+          <h1>Turning ideas into <span class="gradient-text">digital magic.</span></h1>
+          <p class="hero-copy">Hello, I'm <strong>Your Name</strong> — a software engineering student, aspiring web developer and creative problem-solver. I build clean, responsive digital experiences using code and imagination.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore my work ↗</a>
+            <a class="btn btn-secondary" href="#contact">Let's connect</a>
+          </div>
+        </div>
+        <div class="hero-art reveal" aria-label="Abstract glowing futuristic orb">
+          <div class="orb"><div class="orb-core"></div></div>
+          <div class="floating-tag tag-one">✦ Creative thinking</div>
+          <div class="floating-tag tag-two">{"<"} Code the future {">"}</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head reveal"><span class="section-kicker">01 / About me</span><h2>A curious mind with a passion for technology.</h2><p class="section-desc">I enjoy learning how technology works and turning what I learn into useful, attractive web experiences.</p></div>
+        <div class="about-grid">
+          <article class="glass reveal"><h3 style="margin-bottom:12px">My story</h3><p>I'm studying Software Engineering at Victoria University in Kampala, Uganda. I have practical skills in HTML, CSS, JavaScript, Microsoft Office and GitHub. I also use AI tools such as ChatGPT to support my development workflow, explore ideas and improve my problem-solving process.</p><p style="margin-top:14px">My goal is to keep growing as a developer and create digital products that are useful, accessible and enjoyable to use.</p></article>
+          <article class="glass reveal">
+            <div class="info-line"><span>Education</span><strong>Software Engineering</strong></div>
+            <div class="info-line"><span>Institution</span><strong>Victoria University</strong></div>
+            <div class="info-line"><span>Location</span><strong>Kampala, Uganda</strong></div>
+            <div class="info-line"><span>Interests</span><strong>Web development & design</strong></div>
+            <div class="info-line"><span>Currently</span><strong>Learning and building</strong></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal"><span class="section-kicker">02 / My toolkit</span><h2>Skills I'm building with.</h2><p class="section-desc">A growing toolkit for designing, developing and presenting digital solutions.</p></div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><div class="skill-icon">HTML</div><h3>HTML5</h3><p>Building structured, accessible web pages.</p><div class="skill-meter"><span style="--level:85%"></span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">CSS</div><h3>CSS3</h3><p>Responsive layouts, styling and animations.</p><div class="skill-meter"><span style="--level:80%"></span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">JS</div><h3>JavaScript</h3><p>Adding interactivity and dynamic behaviour.</p><div class="skill-meter"><span style="--level:65%"></span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">GH</div><h3>Git & GitHub</h3><p>Version control and sharing code projects.</p><div class="skill-meter"><span style="--level:70%"></span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">MS</div><h3>Microsoft Office</h3><p>Working with documents, spreadsheets and presentations.</p><div class="skill-meter"><span style="--level:80%"></span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">AI</div><h3>AI-assisted workflow</h3><p>Using ChatGPT to brainstorm, learn and refine solutions.</p><div class="skill-meter"><span style="--level:75%"></span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal"><span class="section-kicker">03 / Selected work</span><h2>Ideas become projects.</h2><p class="section-desc">Replace these sample cards with your real projects and GitHub repository links as you build them.</p></div>
+        <div class="projects-grid">
+          <article class="project-card reveal"><span class="project-number">PROJECT 01</span><h3>Personal Portfolio</h3><p>A responsive personal website introducing my skills, background and work.</p><a class="project-link" href="#contact">Add project link ↗</a></article>
+          <article class="project-card reveal"><span class="project-number">PROJECT 02</span><h3>Mobile Money UI Concept</h3><p>A practice interface inspired by modern mobile money dashboards. Demonstration only — no real transactions.</p><a class="project-link" href="#contact">Add project link ↗</a></article>
+          <article class="project-card reveal"><span class="project-number">PROJECT 03</span><h3>JavaScript Web App</h3><p>An interactive web application to demonstrate JavaScript fundamentals and DOM skills.</p><a class="project-link" href="#contact">Add project link ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal"><span class="section-kicker">04 / Get in touch</span><h2>Have an idea? Let's create it.</h2><p class="section-desc">I'm open to learning opportunities, collaboration and exciting projects.</p></div>
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>Contact details</h3>
+            <div class="contact-item"><strong>Email</strong>your.email@example.com</div>
+            <div class="contact-item"><strong>Location</strong>Kampala, Uganda</div>
+            <div class="contact-item"><strong>GitHub</strong>github.com/yourusername</div>
+            <p class="form-note" style="margin-top:16px">Update these placeholders with your real contact details.</p>
+          </div>
+          <div class="contact-card reveal">
+            <h3 style="margin-bottom:16px">Send a message</h3>
+            <form id="contactForm">
+              <input id="senderName" type="text" placeholder="Your name" aria-label="Your name" required>
+              <input id="senderEmail" type="email" placeholder="Your email" aria-label="Your email" required>
+              <textarea id="senderMessage" placeholder="Tell me about your idea..." aria-label="Your message" required></textarea>
+              <button class="btn btn-primary" type="submit">Prepare email ↗</button>
+              <p class="form-note">This opens your email app with the message prepared. Add your email address in the JavaScript below.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container">© <span id="year"></span> Your Name. Designed with curiosity and code in Kampala, Uganda.</div></footer>
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // Replace this with the email address where you want to receive messages.
+    const portfolioEmail = "your.email@example.com";
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    // Close the mobile menu after a navigation link is selected.
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    // Reveal sections smoothly as they enter the screen.
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(item => revealObserver.observe(item));
+
+    // Back-to-top button.
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("show", window.scrollY > 500);
+    });
+    backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+    // Subtle cursor glow on devices with a mouse.
+    const cursorGlow = document.getElementById("cursorGlow");
+    window.addEventListener("pointermove", event => {
+      cursorGlow.style.left = event.clientX + "px";
+      cursorGlow.style.top = event.clientY + "px";
+    });
+
+    // Contact form uses mailto:; no backend or message storage is required.
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const name = document.getElementById("senderName").value.trim();
+      const email = document.getElementById("senderEmail").value.trim();
+      const message = document.getElementById("senderMessage").value.trim();
+      const subject = encodeURIComponent("Portfolio enquiry from " + name);
+      const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\n" + message);
+      window.location.href = `mailto:${portfolioEmail}?subject=${subject}&body=${body}`;
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
